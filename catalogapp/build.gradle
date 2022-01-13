@@ -32,8 +32,10 @@ buildscript {
                 lifeCycleExtensions: '2.4.0'
         ]
         testVersions = [
-                espressoCore: '3.4.0',
-                junit       : '4.13.2',
+                espressoCore : '3.4.0',
+                junit        : '4.13.2',
+                mockitoKotlin: '4.0.0',
+                hilt         : '2.38.1'
         ]
     }
     repositories {
