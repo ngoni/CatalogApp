@@ -1,21 +1,21 @@
 package com.scribblex.catalogapp.ui
 
-import com.scribblex.catalogapp.data.entities.Products
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.scribblex.catalogapp.R
+import com.scribblex.catalogapp.data.entities.Products
+import com.scribblex.catalogapp.databinding.FragmentCatalogListBinding
 import com.scribblex.catalogapp.utils.Resource
 import com.scribblex.catalogapp.utils.ViewUtils.hideProgressBar
 import com.scribblex.catalogapp.utils.ViewUtils.showProgressBar
-import com.scribblex.catalogapp.R
-import com.scribblex.catalogapp.databinding.FragmentCatalogListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -26,9 +26,7 @@ class CatalogListFragment : Fragment() {
     private lateinit var navController: NavController
     private lateinit var catalogListAdapter: CatalogListAdapter
 
-    private val viewModel: CatalogListViewModel by lazy {
-        ViewModelProvider(this)[CatalogListViewModel::class.java]
-    }
+    private val viewModel: CatalogListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +37,6 @@ class CatalogListFragment : Fragment() {
         setupAdapter()
         initViews()
         observeViewModel()
-        fetchCatalogData()
 
         return binding.root
     }
@@ -67,12 +64,8 @@ class CatalogListFragment : Fragment() {
         CatalogListAdapter(callback = callback).also { catalogListAdapter = it }
     }
 
-    private fun fetchCatalogData() {
-       // viewModel.fetchCatalogData()
-    }
-
     private fun observeViewModel() {
-        viewModel.geCatalogList().observe(requireActivity(), Observer {
+        viewModel.catalogList.observe(requireActivity(), Observer {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     hideProgressBar(binding.progressBar)

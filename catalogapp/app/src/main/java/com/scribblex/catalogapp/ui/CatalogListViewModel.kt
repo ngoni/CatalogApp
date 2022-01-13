@@ -19,7 +19,7 @@ class CatalogListViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    private val catalogList = MutableLiveData<Resource<List<Products>>>()
+    private val _catalogList = MutableLiveData<Resource<List<Products>>>()
 
     init {
         viewModelScope.launch {
@@ -27,7 +27,7 @@ class CatalogListViewModel @Inject constructor(
                 notifyError(exception)
             }.collect { results ->
                 val data = results.data!!.products
-                catalogList.value = Resource.success(data)
+                _catalogList.value = Resource.success(data)
             }
         }
     }
@@ -36,8 +36,7 @@ class CatalogListViewModel @Inject constructor(
         Log.d("CatalogListViewModel", "Throwable: " + exception.message)
     }
 
-    fun geCatalogList(): LiveData<Resource<List<Products>>> {
-        return catalogList
-    }
+    val catalogList: LiveData<Resource<List<Products>>>
+        get() = _catalogList
 
 }
