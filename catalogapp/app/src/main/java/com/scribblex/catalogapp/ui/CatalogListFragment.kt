@@ -11,7 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.scribblex.catalogapp.R
-import com.scribblex.catalogapp.data.entities.Products
+import com.scribblex.catalogapp.data.entities.ProductModel
 import com.scribblex.catalogapp.databinding.FragmentCatalogListBinding
 import com.scribblex.catalogapp.utils.Resource
 import com.scribblex.catalogapp.utils.ViewUtils.hideProgressBar
@@ -37,6 +37,7 @@ class CatalogListFragment : Fragment() {
         setupAdapter()
         initViews()
         observeViewModel()
+        viewModel.queryCatalog()
 
         return binding.root
     }
@@ -56,41 +57,52 @@ class CatalogListFragment : Fragment() {
 
 
     private fun setupAdapter() {
-        val callback = fun(product: Products) {
+        val callback = fun(productModel: ProductModel) {
             val action =
-                CatalogListFragmentDirections.actionOpenProductDetailScreen(product)
+                CatalogListFragmentDirections.actionOpenProductDetailScreen(productModel)
             navController.navigate(action)
         }
         CatalogListAdapter(callback = callback).also { catalogListAdapter = it }
     }
 
     private fun observeViewModel() {
-        viewModel.catalogList.observe(requireActivity(), Observer {
-            when (it.status) {
-                Resource.Status.SUCCESS -> {
-                    hideProgressBar(binding.progressBar)
-                    if (it.data?.isEmpty() == true) {
+        viewModel.getViewState().observe(viewLifecycleOwner, Observer {
+            render(it)
+        })
+    }
+
+    private fun render(uiModel: CatalogListUiModel) {
+        when (uiModel) {
+            is CatalogListUiModel.ResourceUpdated -> {
+                when (uiModel.resource.status) {
+
+                    Resource.Status.SUCCESS -> {
+                        hideProgressBar(binding.progressBar)
+                        if (uiModel.resource.data?.isEmpty() == true) {
+                            binding.resultsState.apply {
+                                text = getString(R.string.no_results)
+                                visibility = View.VISIBLE
+                            }
+                        } else {
+                            binding.resultsState.visibility = View.GONE
+                            catalogListAdapter.updateData(uiModel.resource.data)
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        hideProgressBar(binding.progressBar)
                         binding.resultsState.apply {
-                            text = getString(R.string.no_results)
+                            text = uiModel.resource.message
                             visibility = View.VISIBLE
                         }
-                    } else {
+                    }
+
+                    Resource.Status.LOADING -> {
                         binding.resultsState.visibility = View.GONE
-                        catalogListAdapter.updateData(it.data)
+                        showProgressBar(binding.progressBar)
                     }
-                }
-                Resource.Status.ERROR -> {
-                    hideProgressBar(binding.progressBar)
-                    binding.resultsState.apply {
-                        text = it.message
-                        visibility = View.VISIBLE
-                    }
-                }
-                Resource.Status.LOADING -> {
-                    binding.resultsState.visibility = View.GONE
-                    showProgressBar(binding.progressBar)
                 }
             }
-        })
+        }
     }
 }

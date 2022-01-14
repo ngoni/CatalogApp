@@ -3,7 +3,7 @@ package com.scribblex.catalogapp.data.entities
 import com.google.gson.annotations.SerializedName
 
 
-data class SearchResults(
+data class Categories(
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")

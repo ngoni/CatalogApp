@@ -10,18 +10,20 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.scribblex.catalogapp.Constants
+import com.scribblex.catalogapp.Constants.CATEGORY_DRINK_ID
+import com.scribblex.catalogapp.Constants.CATEGORY_FOOD_ID
 import com.scribblex.catalogapp.Constants.VIEW_TYPE_HEADER
 import com.scribblex.catalogapp.Constants.VIEW_TYPE_LIST_ITEM
 import com.scribblex.catalogapp.Constants.VIEW_TYPE_UNSUPPORTED
-import com.scribblex.catalogapp.data.entities.Products
+import com.scribblex.catalogapp.data.entities.ProductModel
 import com.scribblex.catalogapp.databinding.FragmentCatalogItemBinding
 import com.scribblex.catalogapp.databinding.FragmentCatalogItemHeaderBinding
 
 class CatalogListAdapter(
-    private val callback: (Products) -> Unit,
+    private val callback: (ProductModel) -> Unit,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val values: MutableList<Products> = mutableListOf()
+    private val values: MutableList<ProductModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -40,7 +42,7 @@ class CatalogListAdapter(
                 )
             )
             else -> {
-                throw IllegalArgumentException()
+                throw IllegalArgumentException("Unsupported viewType: $viewType")
             }
         }
     }
@@ -49,12 +51,12 @@ class CatalogListAdapter(
         val item = values[position]
         when (viewholder) {
             is HeaderViewHolder -> {
-                viewholder.headerName.text = item.name
+                viewholder.headerName.text = item.categoryName
             }
             is CatalogItemViewHolder -> {
                 viewholder.apply {
 
-                    productTitle.text = item.name
+                    productTitle.text = item.productName
 
                     val url = Constants.BASE_URL + item.url
                     Glide.with(imageView.context)
@@ -72,10 +74,10 @@ class CatalogListAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (values[position].categoryId) {
-            VIEW_TYPE_HEADER -> {
+            CATEGORY_FOOD_ID -> {
                 VIEW_TYPE_HEADER
             }
-            VIEW_TYPE_LIST_ITEM -> {
+            CATEGORY_DRINK_ID -> {
                 VIEW_TYPE_LIST_ITEM
             }
             else -> VIEW_TYPE_UNSUPPORTED
@@ -84,7 +86,7 @@ class CatalogListAdapter(
 
     override fun getItemCount(): Int = values.size
 
-    fun updateData(items: List<Products>?) {
+    fun updateData(items: List<ProductModel>?) {
         items?.let {
             values.clear()
             values.addAll(items)

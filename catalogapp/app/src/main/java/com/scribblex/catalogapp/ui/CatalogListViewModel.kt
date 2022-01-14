@@ -1,7 +1,5 @@
 package com.scribblex.catalogapp.ui
 
-import android.util.Log
-import com.scribblex.catalogapp.data.entities.Products
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,24 +17,27 @@ class CatalogListViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    private val _catalogList = MutableLiveData<Resource<List<Products>>>()
+    private val viewState: MutableLiveData<CatalogListUiModel> = MutableLiveData()
 
-    init {
+    fun queryCatalog() {
         viewModelScope.launch {
             repository.catalog.catch { exception ->
                 notifyError(exception)
             }.collect { results ->
-                val data = results.data!!.products
-                _catalogList.value = Resource.success(data)
+                viewState.value =
+                    CatalogListUiModel.ResourceUpdated(Resource.success(results.data!!))
             }
         }
     }
 
     private fun notifyError(exception: Throwable) {
-        Log.d("CatalogListViewModel", "Throwable: " + exception.message)
+        val message: String = if (exception.message.isNullOrBlank()) "" else exception.message!!
+        viewState.value =
+            CatalogListUiModel.ResourceUpdated(Resource.error(message = message, null))
     }
 
-    val catalogList: LiveData<Resource<List<Products>>>
-        get() = _catalogList
+    fun getViewState(): LiveData<CatalogListUiModel> {
+        return viewState
+    }
 
 }

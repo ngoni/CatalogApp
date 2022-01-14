@@ -29,8 +29,8 @@
         tools:layout="@layout/fragment_product_detail">
 
         <argument
-            android:name="product"
-            app:argType="com.scribblex.catalogapp.data.entities.Products" />
+            android:name="productModel"
+            app:argType="com.scribblex.catalogapp.data.entities.ProductModel" />
 
     </fragment>
 

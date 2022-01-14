@@ -1,6 +1,5 @@
 package com.scribblex.catalogapp.ui
 
-import com.scribblex.catalogapp.data.entities.Products
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -12,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.scribblex.catalogapp.Constants
 import com.scribblex.catalogapp.R
+import com.scribblex.catalogapp.data.entities.ProductModel
 import com.scribblex.catalogapp.databinding.FragmentProductDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,22 +33,25 @@ class ProductDetailFragment : Fragment() {
 
     private fun initViews() {
         val args: ProductDetailFragmentArgs by navArgs()
-        bindDataToUi(args.product)
+        bindDataToUi(args.productModel)
     }
 
-    private fun bindDataToUi(item: Products) {
+    private fun bindDataToUi(productModel: ProductModel) {
         binding.apply {
             productDetailContainer.apply {
 
-                productName.text = item.name
+                productName.text = String.format(
+                    getString(R.string.product_name),
+                    productModel.productName
+                )
                 productPrice.text =
                     String.format(
                         getString(R.string.product_price),
-                        item.salePrice.currency,
-                        item.salePrice.amount
+                        productModel.salePrice.currency,
+                        productModel.salePrice.amount
                     )
 
-                val url = Constants.BASE_URL + item.url
+                val url = Constants.BASE_URL + productModel.url
                 Glide.with(requireContext())
                     .load(url)
                     .placeholder(ColorDrawable(Color.GRAY))
