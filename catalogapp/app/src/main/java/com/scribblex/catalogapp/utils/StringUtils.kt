@@ -1,4 +1,4 @@
-package com.cartrack.omdapi.utils
+package com.scribblex.catalogapp.utils
 
 import androidx.annotation.StringRes
 import com.scribblex.catalogapp.MainApplication

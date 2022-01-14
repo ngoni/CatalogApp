@@ -33,7 +33,8 @@ class ProductDetailFragment : Fragment() {
 
     private fun initViews() {
         val args: ProductDetailFragmentArgs by navArgs()
-        bindDataToUi(args.productModel)
+        val model = args.baseModel as ProductModel
+        bindDataToUi(model)
     }
 
     private fun bindDataToUi(productModel: ProductModel) {

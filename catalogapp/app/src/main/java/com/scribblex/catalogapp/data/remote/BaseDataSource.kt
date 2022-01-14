@@ -1,6 +1,5 @@
 package com.scribblex.catalogapp.data.remote
 
-import android.util.Log
 import com.scribblex.catalogapp.utils.Resource
 import retrofit2.Response
 
@@ -20,7 +19,6 @@ abstract class BaseDataSource {
     }
 
     private fun <T> error(message: String): Resource<T> {
-        Log.d("BaseDataSource", message)
         return Resource.error("Network call has failed for the following reason: $message")
     }
 

@@ -10,20 +10,20 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.scribblex.catalogapp.Constants
-import com.scribblex.catalogapp.Constants.CATEGORY_DRINK_ID
-import com.scribblex.catalogapp.Constants.CATEGORY_FOOD_ID
 import com.scribblex.catalogapp.Constants.VIEW_TYPE_HEADER
 import com.scribblex.catalogapp.Constants.VIEW_TYPE_LIST_ITEM
 import com.scribblex.catalogapp.Constants.VIEW_TYPE_UNSUPPORTED
+import com.scribblex.catalogapp.data.entities.BaseModel
+import com.scribblex.catalogapp.data.entities.CategoryModel
 import com.scribblex.catalogapp.data.entities.ProductModel
 import com.scribblex.catalogapp.databinding.FragmentCatalogItemBinding
 import com.scribblex.catalogapp.databinding.FragmentCatalogItemHeaderBinding
 
 class CatalogListAdapter(
-    private val callback: (ProductModel) -> Unit,
+    private val callback: (BaseModel) -> Unit,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val values: MutableList<ProductModel> = mutableListOf()
+    private val values: MutableList<BaseModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -51,14 +51,16 @@ class CatalogListAdapter(
         val item = values[position]
         when (viewholder) {
             is HeaderViewHolder -> {
-                viewholder.headerName.text = item.categoryName
+                val categoryModel: CategoryModel = item as CategoryModel
+                viewholder.headerName.text = categoryModel.categoryName
             }
             is CatalogItemViewHolder -> {
                 viewholder.apply {
 
-                    productTitle.text = item.productName
+                    val productModel: ProductModel = item as ProductModel
+                    productTitle.text = productModel.productName
 
-                    val url = Constants.BASE_URL + item.url
+                    val url = Constants.BASE_URL + productModel.url
                     Glide.with(imageView.context)
                         .load(url)
                         .placeholder(ColorDrawable(Color.GRAY))
@@ -66,18 +68,18 @@ class CatalogListAdapter(
                         .circleCrop()
                         .into(imageView)
 
-                    productItemContainer.setOnClickListener { callback.invoke(item) }
+                    productItemContainer.setOnClickListener { callback.invoke(productModel) }
                 }
             }
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (values[position].categoryId) {
-            CATEGORY_FOOD_ID -> {
+        return when (values[position].viewType) {
+            VIEW_TYPE_HEADER -> {
                 VIEW_TYPE_HEADER
             }
-            CATEGORY_DRINK_ID -> {
+            VIEW_TYPE_LIST_ITEM -> {
                 VIEW_TYPE_LIST_ITEM
             }
             else -> VIEW_TYPE_UNSUPPORTED
@@ -86,7 +88,7 @@ class CatalogListAdapter(
 
     override fun getItemCount(): Int = values.size
 
-    fun updateData(items: List<ProductModel>?) {
+    fun updateData(items: List<BaseModel>?) {
         items?.let {
             values.clear()
             values.addAll(items)

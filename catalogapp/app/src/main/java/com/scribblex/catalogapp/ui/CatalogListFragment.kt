@@ -11,7 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.scribblex.catalogapp.R
-import com.scribblex.catalogapp.data.entities.ProductModel
+import com.scribblex.catalogapp.data.entities.BaseModel
 import com.scribblex.catalogapp.databinding.FragmentCatalogListBinding
 import com.scribblex.catalogapp.utils.Resource
 import com.scribblex.catalogapp.utils.ViewUtils.hideProgressBar
@@ -57,9 +57,9 @@ class CatalogListFragment : Fragment() {
 
 
     private fun setupAdapter() {
-        val callback = fun(productModel: ProductModel) {
+        val callback = fun(baseModel: BaseModel) {
             val action =
-                CatalogListFragmentDirections.actionOpenProductDetailScreen(productModel)
+                CatalogListFragmentDirections.actionOpenProductDetailScreen(baseModel)
             navController.navigate(action)
         }
         CatalogListAdapter(callback = callback).also { catalogListAdapter = it }

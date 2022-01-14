@@ -1,16 +1,15 @@
 package com.scribblex.catalogapp.data.entities
 
-import android.os.Parcelable
+import com.scribblex.catalogapp.Constants.VIEW_TYPE_LIST_ITEM
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ProductModel(
+    override val viewType: Int = VIEW_TYPE_LIST_ITEM,
     val categoryId: Int,
-    val categoryName: String,
-    val categoryDescription: String? = null,
     val productId: Int,
     val productName: String,
     val url: String,
     val productDescription: String? = null,
     val salePrice: SalePrice
-) : Parcelable
+) : BaseModel()
