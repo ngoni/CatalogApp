@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.scribblex.catalogapp.data.repository.CatalogRepository
 import com.scribblex.catalogapp.ui.CatalogListUiModel.ResourceUpdated
+import com.scribblex.catalogapp.utils.Resource
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
@@ -53,7 +54,15 @@ class CatalogListViewModelTest {
     }
 
     @Test
-    fun testNotifyError() {
-
+    fun testNotifyError(): Unit = runBlocking {
+        launch(Dispatchers.Main) {  // Will be launched in the mainThreadSurrogate dispatcher
+            //setup
+            val exception: Throwable = mock()
+            //act
+            viewModel.notifyError(exception)
+            //validate
+            val state = ResourceUpdated(Resource.error(message = "Something went wrong!!", null))
+            verify(viewStateObserver).onChanged(state)
+        }
     }
 }

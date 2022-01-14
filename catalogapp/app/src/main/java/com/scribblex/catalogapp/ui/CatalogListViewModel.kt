@@ -4,11 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.scribblex.catalogapp.R
 import com.scribblex.catalogapp.data.repository.CatalogRepository
 import com.scribblex.catalogapp.ui.CatalogListUiModel.ResourceUpdated
 import com.scribblex.catalogapp.utils.Resource
-import com.scribblex.catalogapp.utils.StringUtils.getString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
@@ -33,9 +31,9 @@ class CatalogListViewModel @Inject constructor(
         }
     }
 
-    private fun notifyError(exception: Throwable) {
+    fun notifyError(exception: Throwable) {
         val message: String =
-            if (exception.message.isNullOrBlank()) getString(R.string.error_message) else exception.message!!
+            if (exception.message.isNullOrBlank()) "Something went wrong!!" else exception.message!!
 
         val state = ResourceUpdated(Resource.error(message = message, null))
         setViewState(state)
