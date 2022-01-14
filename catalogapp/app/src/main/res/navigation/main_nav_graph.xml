@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph.xml"
+    app:startDestination="@id/catalogListFragment">
+
+    <fragment
+        android:id="@+id/catalogListFragment"
+        android:name="com.scribblex.catalogapp.ui.CatalogListFragment"
+        android:label="CatalogListFragment"
+        tools:layout="@layout/fragment_catalog_list">
+
+        <action
+            android:id="@+id/action_open_product_detail_screen"
+            app:destination="@+id/productDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/catalogListFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.scribblex.catalogapp.ui.ProductDetailFragment"
+        android:label="ProductDetailFragment"
+        tools:layout="@layout/fragment_product_detail">
+
+        <argument
+            android:name="baseModel"
+            app:argType="com.scribblex.catalogapp.data.entities.BaseModel" />
+
+    </fragment>
+
+</navigation>
