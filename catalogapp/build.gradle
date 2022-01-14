@@ -32,11 +32,12 @@ buildscript {
                 lifeCycleExtensions: '2.4.0'
         ]
         testVersions = [
-                archVersion  : '2.1.0',
-                espressoCore : '3.4.0',
-                junit        : '4.13.2',
-                mockitoKotlin: '4.0.0',
-                hilt         : '2.38.1'
+                archVersion      : '2.1.0',
+                coroutinesTest: '1.6.0',
+                espressoCore     : '3.4.0',
+                junit            : '4.13.2',
+                hilt             : '2.38.1',
+                mockitoKotlin    : '4.0.0'
         ]
     }
     repositories {
