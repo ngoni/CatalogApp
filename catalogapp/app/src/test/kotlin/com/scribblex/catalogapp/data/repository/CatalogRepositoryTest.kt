@@ -1,10 +1,9 @@
-package com.scribblex.catalogapp.ui
+package com.scribblex.catalogapp.data.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.scribblex.catalogapp.data.repository.CatalogRepository
-import com.scribblex.catalogapp.ui.CatalogListUiModel.ResourceUpdated
-import com.scribblex.catalogapp.utils.Resource
+import com.scribblex.catalogapp.ui.CatalogListUiModel
+import com.scribblex.catalogapp.ui.CatalogListViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
@@ -12,11 +11,11 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito.verify
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 
 @DelicateCoroutinesApi
-class CatalogListViewModelTest {
+class CatalogRepositoryTest {
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
@@ -42,27 +41,14 @@ class CatalogListViewModelTest {
     }
 
     @Test
-    fun testViewModelSetsDataToView(): Unit = runBlocking {
+    fun testFetchCatalogSendsDataToViewModel(): Unit = runBlocking {
         launch(Dispatchers.Main) {  // Will be launched in the mainThreadSurrogate dispatcher
             //setup
-            val data = mock<ResourceUpdated>()
+            val data = mock<CatalogListUiModel.ResourceUpdated>()
             //act
             viewModel.setViewState(data)
             //validate
             verify(viewStateObserver).onChanged(data)
-        }
-    }
-
-    @Test
-    fun testNotifyError(): Unit = runBlocking {
-        launch(Dispatchers.Main) {  // Will be launched in the mainThreadSurrogate dispatcher
-            //setup
-            val exception = mock<Throwable>()
-            //act
-            viewModel.notifyError(exception)
-            //validate
-            val state = ResourceUpdated(Resource.error(message = "Something went wrong!!", null))
-            verify(viewStateObserver).onChanged(state)
         }
     }
 }
