@@ -22,7 +22,7 @@ class CatalogListViewModel @Inject constructor(
 
     fun queryCatalog() {
         viewModelScope.launch {
-            repository.catalog.catch { exception ->
+            repository.fetchCatalog().catch { exception ->
                 notifyError(exception)
             }.collect { results ->
                 val state = ResourceUpdated(Resource.success(results.data!!))
