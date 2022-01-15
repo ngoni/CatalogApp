@@ -7,4 +7,6 @@ object Constants {
     const val VIEW_TYPE_UNSUPPORTED: Int = 0
     const val VIEW_TYPE_HEADER: Int = 1
     const val VIEW_TYPE_LIST_ITEM: Int = 2
+
+    const val PRODUCT_MODEL: String = "productModel"
 }
