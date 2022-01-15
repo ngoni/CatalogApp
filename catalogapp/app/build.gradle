@@ -41,6 +41,7 @@ android {
 
 dependencies {
 
+    // ==============================  GENERAL APP LIBRARIES ============================================
     implementation "androidx.core:core-ktx:$supportVersions.coreKtx"
     implementation "androidx.appcompat:appcompat:$supportVersions.appcompat"
     implementation "com.google.android.material:material:$supportVersions.material"
@@ -76,20 +77,32 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$libVersions.glide"
     annotationProcessor "com.github.bumptech.glide:compiler:$libVersions.glide"
 
-    // Tests
+
+    // ==============================  APP TESTING LIBRARIES ============================================
     testImplementation "junit:junit:$testVersions.junit"
+
+    // Mockito-Kotlin
     testImplementation "org.mockito.kotlin:mockito-kotlin:$testVersions.mockitoKotlin"
 
-    // optional - Test helpers for LiveData
+    // Architecture core testing
     testImplementation "androidx.arch.core:core-testing:$testVersions.archVersion"
 
-    // for testing ViewModels and setting Dispatchers.setMain
+    // Coroutines-test
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$testVersions.coroutinesTest"
 
-    // Hilt Testing
-    androidTestImplementation "com.google.dagger:hilt-android-testing$testVersions.mockitoKotlin"
-    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$testVersions.mockitoKotlin"
+    // Hilt Android Testing
+    testImplementation "com.google.dagger:hilt-android-testing:$testVersions.hilt"
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    // Robolectric
+    testImplementation "org.robolectric:robolectric:$testVersions.robolectric"
+
+    // Hilt Testing
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$testVersions.hilt"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$testVersions.hilt"
+
+    // Espresso
     androidTestImplementation "androidx.test.espresso:espresso-core:$testVersions.espressoCore"
+
+    // JUnit
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
 }
