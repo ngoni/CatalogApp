@@ -46,7 +46,7 @@ class ProductDetailFragment : Fragment() {
      * args in a Bundle.
      */
     private fun getArgs(): ProductModel {
-        return if (arguments != null) {
+        return if (arguments?.get(PRODUCT_MODEL) != null) {
             arguments?.get(PRODUCT_MODEL) as ProductModel
         } else {
             val args: ProductDetailFragmentArgs by navArgs()
