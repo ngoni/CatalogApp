@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.scribblex.catalogapp.Constants
+import com.scribblex.catalogapp.Constants.PRODUCT_MODEL
 import com.scribblex.catalogapp.R
 import com.scribblex.catalogapp.data.entities.ProductModel
 import com.scribblex.catalogapp.databinding.FragmentProductDetailBinding
@@ -32,9 +33,25 @@ class ProductDetailFragment : Fragment() {
     }
 
     private fun initViews() {
-        val args: ProductDetailFragmentArgs by navArgs()
-        val model = args.baseModel as ProductModel
+        val model: ProductModel = getArgs()
         bindDataToUi(model)
+    }
+
+    /**
+     * Below we either fetch the Arguments from the Bundle
+     * or from SafeArgs.
+     * This is to accommodate passing arguments when running tests.
+     * See issue with using launchFragmentInContainer for context.
+     * We provide an alternative launchFragmentInHiltContainer,which sets
+     * args in a Bundle.
+     */
+    private fun getArgs(): ProductModel {
+        return if (arguments != null) {
+            arguments?.get(PRODUCT_MODEL) as ProductModel
+        } else {
+            val args: ProductDetailFragmentArgs by navArgs()
+            args.baseModel as ProductModel
+        }
     }
 
     private fun bindDataToUi(productModel: ProductModel) {
@@ -48,8 +65,8 @@ class ProductDetailFragment : Fragment() {
                 productPrice.text =
                     String.format(
                         getString(R.string.product_price),
-                        productModel.salePrice.currency,
-                        productModel.salePrice.amount
+                        productModel.salePrice?.currency,
+                        productModel.salePrice?.amount
                     )
 
                 val url = Constants.BASE_URL + productModel.url

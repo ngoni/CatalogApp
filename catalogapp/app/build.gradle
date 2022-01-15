@@ -110,10 +110,9 @@ dependencies {
 
     // Robolectric
     testImplementation "org.robolectric:robolectric:$testVersions.robolectric"
-    kaptAndroidTest "org.robolectric:robolectric:$testVersions.robolectric"
 
     // Espresso
-    androidTestImplementation "androidx.test.espresso:espresso-core:$testVersions.espressoCore"
+    testImplementation "androidx.test.espresso:espresso-core:$testVersions.espressoCore"
 
     // AndroidX Test Ext JUnit
     androidTestImplementation "androidx.test.ext:junit:$testVersions.androidXJunit"
@@ -121,4 +120,7 @@ dependencies {
 
     //Fragment Testing
     debugImplementation "androidx.fragment:fragment-testing:$testVersions.fragmentTesting"
+
+    // Truth Assertions
+    testImplementation "com.google.truth:truth:1.1.3"
 }
