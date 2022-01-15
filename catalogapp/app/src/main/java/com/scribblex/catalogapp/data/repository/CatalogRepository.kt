@@ -10,10 +10,11 @@ import kotlinx.coroutines.flow.transform
 import javax.inject.Inject
 
 class CatalogRepository @Inject constructor(
-    remoteDataSource: CatalogRemoteDataSource
+    private val remoteDataSource: CatalogRemoteDataSource
 ) {
-    val catalog: Flow<Resource<MutableList<BaseModel>>> by lazy {
-        remoteDataSource.catalogList
+
+    fun fetchCatalog(): Flow<Resource<MutableList<BaseModel>>> {
+        return remoteDataSource.catalogList
             .transform {
                 // TODO: 2022/01/14 Optimize the code below
                 val sectionList: MutableList<BaseModel> = mutableListOf()

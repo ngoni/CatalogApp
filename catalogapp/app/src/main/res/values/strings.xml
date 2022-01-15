@@ -5,5 +5,4 @@
     <string name="toolbar_title_text">Toolbar Title</string>
     <string name="title_catalog_list_screen">Catalog List Screen</string>
     <string name="product_name">Product Name: %1s</string>
-    <string name="error_message">Something went wrong!!</string>
 </resources>
