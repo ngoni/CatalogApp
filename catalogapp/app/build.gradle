@@ -30,12 +30,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
     }
 }
 
@@ -90,7 +98,6 @@ dependencies {
     // Coroutines-test
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$testVersions.coroutinesTest"
 
-
     // Hilt Testing
     // For Robolectric tests.
     testImplementation "com.google.dagger:hilt-android-testing:$pluginVersions.hilt"
@@ -108,6 +115,10 @@ dependencies {
     // Espresso
     androidTestImplementation "androidx.test.espresso:espresso-core:$testVersions.espressoCore"
 
-    // JUnit
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    // AndroidX Test Ext JUnit
+    androidTestImplementation "androidx.test.ext:junit:$testVersions.androidXJunit"
+    testImplementation "androidx.test.ext:junit:$testVersions.androidXJunit"
+
+    //Fragment Testing
+    debugImplementation "androidx.fragment:fragment-testing:$testVersions.fragmentTesting"
 }

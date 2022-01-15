@@ -1,8 +1,8 @@
 package com.scribblex.catalogapp.ui
 
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -18,8 +18,12 @@ import org.robolectric.annotation.LooperMode
 @Config(manifest = Config.NONE)
 class MainActivityTest {
 
-    @get:Rule
+    @get:Rule(order = 0)
     var hiltAndroidRule = HiltAndroidRule(this)
+
+    @get:Rule(order = 1)
+    var activityScenarioRule: ActivityScenarioRule<MainActivity> =
+        ActivityScenarioRule(MainActivity::class.java)
 
     @Before
     fun setUp() {
@@ -27,7 +31,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun whenMainActivityLaunchedNavigationHelperIsInvokedForFragment() {
-        assertTrue(true)
+    fun whenMainActivityLaunchedNavigationControllerOpensNavHostFragment() {
+        activityScenarioRule.scenario
     }
 }
