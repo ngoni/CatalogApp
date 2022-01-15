@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.scribblex.catalogapp.utils.StringUtils.getString
-import com.scribblex.catalogapp.R
 import com.scribblex.catalogapp.data.repository.CatalogRepository
+import com.scribblex.catalogapp.ui.CatalogListUiModel.ResourceUpdated
 import com.scribblex.catalogapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
@@ -23,23 +22,29 @@ class CatalogListViewModel @Inject constructor(
 
     fun queryCatalog() {
         viewModelScope.launch {
-            repository.catalog.catch { exception ->
+            repository.fetchCatalog().catch { exception ->
                 notifyError(exception)
             }.collect { results ->
-                viewState.value =
-                    CatalogListUiModel.ResourceUpdated(Resource.success(results.data!!))
+                val state = ResourceUpdated(Resource.success(results.data!!))
+                setViewState(state)
             }
         }
     }
 
-    private fun notifyError(exception: Throwable) {
-        val message: String = if (exception.message.isNullOrBlank()) getString(R.string.error_message) else exception.message!!
-        viewState.value =
-            CatalogListUiModel.ResourceUpdated(Resource.error(message = message, null))
+    fun notifyError(exception: Throwable) {
+        val message: String =
+            if (exception.message.isNullOrBlank()) "Something went wrong!!" else exception.message!!
+
+        val state = ResourceUpdated(Resource.error(message = message, null))
+        setViewState(state)
     }
 
     fun getViewState(): LiveData<CatalogListUiModel> {
         return viewState
+    }
+
+    fun setViewState(resource: ResourceUpdated) {
+        viewState.value = resource
     }
 
 }

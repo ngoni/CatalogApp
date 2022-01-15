@@ -11,5 +11,5 @@ data class ProductModel(
     val productName: String,
     val url: String,
     val productDescription: String? = null,
-    val salePrice: SalePrice
+    val salePrice: SalePrice?
 ) : BaseModel()

@@ -32,6 +32,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/product_image"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/media_title_text" />
+        tools:text="Baking Powder" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
