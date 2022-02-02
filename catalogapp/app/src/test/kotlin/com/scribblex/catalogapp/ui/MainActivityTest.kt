@@ -38,7 +38,7 @@ class MainActivityTest {
     @Test
     fun checkToolBarisVisibleWhenMainActivityLaunched() {
         val activity: MainActivity = Robolectric.setupActivity(MainActivity::class.java)
-        assertThat(activity.requireViewById<MaterialToolbar>(R.id.toolbar).isVisible)
+        assertThat(activity.requireViewById<MaterialToolbar>(R.id.toolbar).isVisible).isTrue()
     }
 
     @Test
