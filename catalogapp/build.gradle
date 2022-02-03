@@ -16,6 +16,7 @@ buildscript {
                 hilt  : '2.38.1'
         ]
         supportVersions = [
+                accompanist        : '0.22.1-rc',
                 appcompat          : '1.4.0',
                 compose            : '1.1.0-rc03',
                 composeActivity    : '1.4.0',
