@@ -11,16 +11,21 @@ buildscript {
                 targetSdk : 31,
         ]
         pluginVersions = [
-                gradle: '7.0.4',
-                kotlin: '1.6.10',
+                gradle: '7.1.0',
+                kotlin: '1.6.0',
                 hilt  : '2.38.1'
         ]
         supportVersions = [
                 appcompat          : '1.4.0',
+                compose            : '1.1.0-rc03',
+                composeActivity    : '1.4.0',
+                composeThemeAdapter: '1.1.3',
+                composeNavigation  : '2.4.0',
                 constraintlayout   : '2.1.2',
                 lifecycleExtensions: '2.3.1',
                 material           : '1.4.0',
-                navigation         : '2.3.5',
+                navigation         : '2.4.0',
+                navigationSafeArgs : '2.5.0-alpha01', // todo: downgrade when v2.4.1 is available
                 coreKtx            : '1.7.0',
                 recyclerview       : '1.2.1'
         ]
@@ -51,7 +56,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$pluginVersions.gradle"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$pluginVersions.kotlin"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$pluginVersions.hilt"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$supportVersions.navigation"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$supportVersions.navigationSafeArgs"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
