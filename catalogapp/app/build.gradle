@@ -104,6 +104,10 @@ dependencies {
     implementation "androidx.compose.material:material-icons-core:$supportVersions.compose"
     implementation "androidx.compose.material:material-icons-extended:$supportVersions.compose"
 
+    // Accompanist
+    implementation "com.google.accompanist:accompanist-insets:$supportVersions.accompanist"
+    implementation "com.google.accompanist:accompanist-systemuicontroller:$supportVersions.accompanist"
+
     // ==============================  APP TESTING LIBRARIES ============================================
     testImplementation "junit:junit:$testVersions.junit"
 
