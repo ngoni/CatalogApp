@@ -1,6 +1,6 @@
 package com.scribblex.catalogapp.data.entities
 
-import com.scribblex.catalogapp.Constants.VIEW_TYPE_HEADER
+import com.scribblex.catalogapp.utils.Constants.VIEW_TYPE_HEADER
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

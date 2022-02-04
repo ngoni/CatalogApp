@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.scribblex.catalogapp.Constants
-import com.scribblex.catalogapp.Constants.PRODUCT_MODEL
+import com.scribblex.catalogapp.utils.Constants
+import com.scribblex.catalogapp.utils.Constants.PRODUCT_MODEL
 import com.scribblex.catalogapp.R
 import com.scribblex.catalogapp.data.entities.ProductModel
 import com.scribblex.catalogapp.databinding.FragmentProductDetailBinding

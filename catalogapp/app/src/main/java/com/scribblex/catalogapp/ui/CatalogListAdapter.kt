@@ -9,10 +9,10 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.scribblex.catalogapp.Constants
-import com.scribblex.catalogapp.Constants.VIEW_TYPE_HEADER
-import com.scribblex.catalogapp.Constants.VIEW_TYPE_LIST_ITEM
-import com.scribblex.catalogapp.Constants.VIEW_TYPE_UNSUPPORTED
+import com.scribblex.catalogapp.utils.Constants
+import com.scribblex.catalogapp.utils.Constants.VIEW_TYPE_HEADER
+import com.scribblex.catalogapp.utils.Constants.VIEW_TYPE_LIST_ITEM
+import com.scribblex.catalogapp.utils.Constants.VIEW_TYPE_UNSUPPORTED
 import com.scribblex.catalogapp.data.entities.BaseModel
 import com.scribblex.catalogapp.data.entities.CategoryModel
 import com.scribblex.catalogapp.data.entities.ProductModel
