@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import com.scribblex.catalogapp.Constants
+import com.scribblex.catalogapp.utils.Constants
 import com.scribblex.catalogapp.R
 import com.scribblex.catalogapp.data.entities.ProductModel
 import dagger.hilt.android.testing.HiltAndroidRule

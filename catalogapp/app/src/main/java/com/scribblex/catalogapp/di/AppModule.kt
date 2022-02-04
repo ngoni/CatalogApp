@@ -1,6 +1,6 @@
 package com.scribblex.catalogapp.di
 
-import com.scribblex.catalogapp.Constants
+import com.scribblex.catalogapp.utils.Constants
 import com.scribblex.catalogapp.data.remote.CatalogApiService
 import com.scribblex.catalogapp.data.remote.CatalogRemoteDataSource
 import com.scribblex.catalogapp.data.repository.CatalogRepository

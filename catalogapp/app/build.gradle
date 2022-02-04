@@ -103,6 +103,10 @@ dependencies {
     // Material design icons
     implementation "androidx.compose.material:material-icons-core:$supportVersions.compose"
     implementation "androidx.compose.material:material-icons-extended:$supportVersions.compose"
+    // ConstraintLayout
+    implementation "androidx.constraintlayout:constraintlayout-compose:$supportVersions.constraintLayoutCompose"
+    // Coil
+    implementation "io.coil-kt:coil-compose:$supportVersions.coilCompose"
 
     // Accompanist
     implementation "com.google.accompanist:accompanist-insets:$supportVersions.accompanist"
