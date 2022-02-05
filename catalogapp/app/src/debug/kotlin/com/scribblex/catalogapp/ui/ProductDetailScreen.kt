@@ -25,7 +25,7 @@ fun ProductDetailScreen(
     navigationActions: CatalogAppNavigationActions,
     productModel: ProductModel
 ) {
-    productDetailBody(productModel)
+    ProductDetailContent(productModel)
 }
 
 @Preview("ProductDetailScreen")
@@ -38,7 +38,7 @@ fun PreviewProductDetailScreen() {
 
 
 @Composable
-fun productDetailBody(productModel: ProductModel) {
+fun ProductDetailContent(productModel: ProductModel) {
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
 
         val (textColumn, productImageView) = createRefs()
