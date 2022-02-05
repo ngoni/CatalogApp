@@ -16,6 +16,9 @@
 
 package com.scribblex.catalogapp.ui.theme
 
+import androidx.compose.material.Colors
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.ui.graphics.Color
 
 val Red200 = Color(0xfff297a2)
@@ -23,3 +26,29 @@ val Red300 = Color(0xffea6d7e)
 val Red700 = Color(0xffdd0d3c)
 val Red800 = Color(0xffd00036)
 val Red900 = Color(0xffc20029)
+
+val LightThemeColors = lightColors(
+    primary = Red700,
+    primaryVariant = Red900,
+    onPrimary = Color.White,
+    secondary = Red700,
+    secondaryVariant = Red900,
+    onSecondary = Color.White,
+    error = Red800,
+    onBackground = Color.Black,
+
+    )
+
+val DarkThemeColors = darkColors(
+    primary = Red300,
+    primaryVariant = Red700,
+    onPrimary = Color.Black,
+    secondary = Red300,
+    onSecondary = Color.Black,
+    error = Red200,
+    onBackground = Color.White
+)
+
+fun getThemedColor(isDarkMode: Boolean): Colors {
+    return if (isDarkMode) DarkThemeColors else LightThemeColors
+}
