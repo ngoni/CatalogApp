@@ -13,11 +13,12 @@ class CatalogRepository @Inject constructor(
     private val remoteDataSource: CatalogRemoteDataSource
 ) {
 
-    fun fetchCatalog(): Flow<Resource<MutableList<BaseModel>>> {
+    fun fetchCatalog(): Flow<Resource<HashMap<String, MutableList<BaseModel>>>> {
         return remoteDataSource.catalogList
             .transform {
                 // TODO: 2022/01/14 Optimize the code below
                 val sectionList: MutableList<BaseModel> = mutableListOf()
+                val groupedMap: HashMap<String, MutableList<BaseModel>> = HashMap()
 
                 for (item in it.data!!) {
                     val categoryModel = CategoryModel(
@@ -34,8 +35,9 @@ class CatalogRepository @Inject constructor(
                         )
                         sectionList.add(productModel)
                     }
+                    groupedMap[item.name] = sectionList
                 }
-                emit(Resource.success(sectionList))
+                emit(Resource.success(groupedMap))
             }
     }
 }

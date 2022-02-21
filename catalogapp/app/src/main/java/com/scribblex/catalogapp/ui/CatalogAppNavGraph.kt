@@ -4,10 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.scribblex.catalogapp.utils.Constants.PRODUCT_MODEL
 import com.scribblex.catalogapp.data.entities.ProductModel
 import com.scribblex.catalogapp.ui.CatalogAppDestinations.CATALOG_LIST_ROUTE
 import com.scribblex.catalogapp.ui.CatalogAppDestinations.PRODUCT_DETAIL_ROUTE
+import com.scribblex.catalogapp.utils.Constants.PRODUCT_MODEL
 
 @Composable
 fun CatalogAppNavGraph(

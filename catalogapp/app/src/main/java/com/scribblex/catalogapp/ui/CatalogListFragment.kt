@@ -85,7 +85,8 @@ class CatalogListFragment : Fragment() {
                             }
                         } else {
                             binding.resultsState.visibility = View.GONE
-                            catalogListAdapter.updateData(uiModel.resource.data)
+
+//                            catalogListAdapter.updateData(uiModel.resource.data)
                         }
                     }
 

@@ -5,6 +5,6 @@ import com.scribblex.catalogapp.utils.Resource
 
 sealed class CatalogListUiModel {
 
-    data class ResourceUpdated(val resource: Resource<MutableList<BaseModel>>) :
+    data class ResourceUpdated(val resource: Resource<HashMap<String, MutableList<BaseModel>>>) :
         CatalogListUiModel()
 }
