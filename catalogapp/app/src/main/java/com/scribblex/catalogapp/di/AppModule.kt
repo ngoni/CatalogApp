@@ -1,9 +1,9 @@
 package com.scribblex.catalogapp.di
 
-import com.scribblex.catalogapp.utils.Constants
 import com.scribblex.catalogapp.data.remote.CatalogApiService
 import com.scribblex.catalogapp.data.remote.CatalogRemoteDataSource
-import com.scribblex.catalogapp.data.repository.CatalogRepository
+import com.scribblex.catalogapp.data.repository.Repository
+import com.scribblex.catalogapp.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,7 +35,7 @@ object AppModule {
     @Provides
     fun provideCatalogRepository(
         catalogRemoteDataSource: CatalogRemoteDataSource
-    ) = CatalogRepository(catalogRemoteDataSource)
+    ) = Repository(catalogRemoteDataSource)
 
     private fun setupRetrofit(): Retrofit {
         val logging = HttpLoggingInterceptor()

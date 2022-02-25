@@ -11,5 +11,5 @@ data class Categories(
     @SerializedName("description")
     val description: String? = null,
     @SerializedName("products")
-    val products: List<Products>
+    val products: List<Product>
 )

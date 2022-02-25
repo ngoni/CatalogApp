@@ -1,4 +1,4 @@
-package com.scribblex.catalogapp.ui
+package com.scribblex.catalogapp.ui.cataloglisting
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

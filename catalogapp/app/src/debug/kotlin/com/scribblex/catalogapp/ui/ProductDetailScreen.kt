@@ -1,50 +1,68 @@
 package com.scribblex.catalogapp.ui
 
-import android.content.res.Configuration
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
-import com.scribblex.catalogapp.utils.Constants
+import com.scribblex.catalogapp.R
+import com.scribblex.catalogapp.data.entities.BaseModel
+import com.scribblex.catalogapp.data.entities.ProductModel
+import com.scribblex.catalogapp.ui.cataloglisting.BaseUiModel
+import com.scribblex.catalogapp.ui.cataloglisting.ProductUIModel.ProductUpdated
+import com.scribblex.catalogapp.ui.productdetail.ProductDetailViewModel
+import com.scribblex.catalogapp.utils.Constants.BASE_URL
 import com.scribblex.catalogapp.utils.Constants.DEFAULT_AMOUNT
 import com.scribblex.catalogapp.utils.Constants.DEFAULT_CURRENCY
 import com.scribblex.catalogapp.utils.Margins.DP_0
 import com.scribblex.catalogapp.utils.Margins.DP_24
 import com.scribblex.catalogapp.utils.Margins.DP_8
-import com.scribblex.catalogapp.R
-import com.scribblex.catalogapp.data.entities.ProductModel
+
+
+private lateinit var navigationActions: CatalogAppNavigationActions
 
 @Composable
 fun ProductDetailScreen(
-    navigationActions: CatalogAppNavigationActions,
-    productModel: ProductModel
+    _navigationActions: CatalogAppNavigationActions,
+    categoryId: Int,
+    productId: Int
 ) {
-    ProductDetailContent(productModel)
+    navigationActions = _navigationActions
+    val viewModel = hiltViewModel<ProductDetailViewModel>()
+    val viewState = viewModel.getViewState().observeAsState().value
+    viewState?.let { renderUI(it) }
+    viewModel.getProduct(categoryId, productId)
 }
 
-@Preview("ProductDetailScreen")
-@Preview("ProductDetailScreen (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun PreviewProductDetailScreen() {
-    // TODO: look at how preview renders when there's dependencies
-//    ProductDetailScreen(navigationActions =, productModel =)
+fun renderUI(uiModel: BaseUiModel) {
+    when (uiModel) {
+        is ProductUpdated -> {
+            uiModel.productModel?.let { ProductDetailContent(it) }
+        }
+        else -> {
+            throw IllegalArgumentException()
+        }
+    }
 }
 
-
 @Composable
-fun ProductDetailContent(productModel: ProductModel) {
+fun ProductDetailContent(baseModel: BaseModel) {
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
 
         val (textColumn, productImageView) = createRefs()
 
-        val url = Constants.BASE_URL + productModel.url
-        val painter = rememberImagePainter(data = url)
+        val productModel = baseModel as ProductModel
+        val url = BASE_URL + productModel.url
+        val painter = rememberImagePainter(data = url, builder = {
+            error(R.drawable.ic_globe)
+        })
         Image(
             painter = painter,
             contentDescription = null,
@@ -52,7 +70,7 @@ fun ProductDetailContent(productModel: ProductModel) {
                 .constrainAs(productImageView) {
                     top.linkTo(parent.top, margin = DP_0)
                 }
-                .wrapContentSize()
+                .aspectRatio(1f, false)
                 .animateContentSize()
         )
         Column(modifier = Modifier
@@ -63,7 +81,8 @@ fun ProductDetailContent(productModel: ProductModel) {
         ) {
             val productName =
                 stringResource(
-                    R.string.product_name, productModel.productName
+                    R.string.product_name,
+                    productModel.productName
                 )
             Text(
                 text = productName,

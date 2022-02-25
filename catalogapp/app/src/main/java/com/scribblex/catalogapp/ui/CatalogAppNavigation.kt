@@ -33,8 +33,9 @@ class CatalogAppNavigationActions(navController: NavHostController) {
         }
     }
 
-    val navigateToProductDetail = {
-        navController.navigate(PRODUCT_DETAIL_ROUTE) {
+    val navigateToProductDetail = fun(categoryId: Int, productId: Int) {
+        val navigate = "$PRODUCT_DETAIL_ROUTE/$categoryId/$productId"
+        navController.navigate(route = navigate) {
             popUpTo(navController.graph.findStartDestination().id) {
                 saveState = true
             }

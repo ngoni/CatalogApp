@@ -69,6 +69,9 @@ dependencies {
     //Lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$libVersions.lifeCycleExtensions"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$libVersions.lifeCycleExtensions"
+    // ViewModel utilities for Compose
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$libVersions.lifeCycleExtensions"
+    implementation "androidx.compose.runtime:runtime-livedata:$libVersions.runtimeLiveData"
 
     //Kotlin Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$libVersions.coroutines"
@@ -81,6 +84,7 @@ dependencies {
     // Hilt
     implementation "com.google.dagger:hilt-android:$pluginVersions.hilt"
     kapt "com.google.dagger:hilt-android-compiler:$pluginVersions.hilt"
+    implementation "androidx.hilt:hilt-navigation-compose:$libVersions.hiltNavigationCompose"
 
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:$libVersions.okhttp"

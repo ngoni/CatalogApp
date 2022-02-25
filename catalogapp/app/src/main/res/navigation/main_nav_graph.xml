@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/catalogListFragment"
-        android:name="com.scribblex.catalogapp.ui.CatalogListFragment"
+        android:name="com.scribblex.catalogapp.ui.cataloglisting.CatalogListFragment"
         android:label="CatalogListFragment"
         tools:layout="@layout/fragment_catalog_list">
 
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/productDetailFragment"
-        android:name="com.scribblex.catalogapp.ui.ProductDetailFragment"
+        android:name="com.scribblex.catalogapp.ui.productdetail.ProductDetailFragment"
         android:label="ProductDetailFragment"
         tools:layout="@layout/fragment_product_detail">
 

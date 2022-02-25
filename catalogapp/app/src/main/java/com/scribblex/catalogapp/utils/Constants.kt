@@ -9,5 +9,7 @@ object Constants {
     const val VIEW_TYPE_LIST_ITEM: Int = 2
     const val DEFAULT_CURRENCY: String = "$"
     const val DEFAULT_AMOUNT: String = "0.00"
-    const val PRODUCT_MODEL: String = "productModel"
+    const val CATEGORY_ID: String = "categoryId"
+    const val PRODUCT_ID: String = "productId"
+    const val UN_DEFINED: Int = -1
 }

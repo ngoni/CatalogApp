@@ -13,7 +13,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".ui.CatalogListFragment"
+        tools:context=".ui.cataloglisting.CatalogListFragment"
         tools:listitem="@layout/fragment_catalog_item" />
 
     <androidx.appcompat.widget.AppCompatTextView

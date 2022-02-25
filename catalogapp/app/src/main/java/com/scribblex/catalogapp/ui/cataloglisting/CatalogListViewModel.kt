@@ -1,11 +1,11 @@
-package com.scribblex.catalogapp.ui
+package com.scribblex.catalogapp.ui.cataloglisting
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.scribblex.catalogapp.data.repository.CatalogRepository
-import com.scribblex.catalogapp.ui.CatalogListUiModel.ResourceUpdated
+import com.scribblex.catalogapp.data.repository.Repository
+import com.scribblex.catalogapp.ui.cataloglisting.CatalogListUiModel.ResourceUpdated
 import com.scribblex.catalogapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
@@ -14,11 +14,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CatalogListViewModel @Inject constructor(
-    private val repository: CatalogRepository
+    private val repository: Repository
 ) :
     ViewModel() {
 
-    private val viewState: MutableLiveData<CatalogListUiModel> = MutableLiveData()
+    private val viewState: MutableLiveData<BaseUiModel> = MutableLiveData()
 
     fun queryCatalog() {
         viewModelScope.launch {
@@ -39,7 +39,7 @@ class CatalogListViewModel @Inject constructor(
         setViewState(state)
     }
 
-    fun getViewState(): LiveData<CatalogListUiModel> {
+    fun getViewState(): LiveData<BaseUiModel> {
         return viewState
     }
 
