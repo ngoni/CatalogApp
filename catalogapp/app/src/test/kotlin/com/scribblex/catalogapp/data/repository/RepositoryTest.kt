@@ -2,8 +2,8 @@ package com.scribblex.catalogapp.data.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.scribblex.catalogapp.ui.CatalogListUiModel
-import com.scribblex.catalogapp.ui.CatalogListViewModel
+import com.scribblex.catalogapp.ui.cataloglisting.CatalogListUiModel
+import com.scribblex.catalogapp.ui.cataloglisting.CatalogListViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
@@ -15,13 +15,13 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 
 @DelicateCoroutinesApi
-class CatalogRepositoryTest {
+class RepositoryTest {
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
     private val viewStateObserver = mock<Observer<CatalogListUiModel>>()
-    private var repository = mock<CatalogRepository>()
+    private var repository = mock<Repository>()
     private lateinit var viewModel: CatalogListViewModel
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")
 

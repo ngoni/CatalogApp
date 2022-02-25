@@ -33,7 +33,7 @@ class ProductDetailFragmentTest {
     @Test
     fun testProductNameIsVisibleInProductDetailsFragment() {
         val productModel = mock<ProductModel>()
-        val fragmentArgs : Bundle = bundleOf(Pair(Constants.PRODUCT_MODEL, productModel))
+        val fragmentArgs : Bundle = bundleOf(Pair(Constants.PRODUCT_ID, productModel))
         launchFragmentInHiltContainer<ProductDetailFragment>(fragmentArgs = fragmentArgs) {
             this.view?.findViewById<AppCompatTextView>(R.id.product_name)
                 ?.let { assert(it.isVisible) }

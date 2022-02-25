@@ -39,7 +39,7 @@ fun CatalogApp() {
                 val navigationActions = remember(navController) {
                     CatalogAppNavigationActions(navController = navController)
                 }
-                CatalogAppNavGraph(
+                AppNavGraph(
                     navController = navController,
                     navigationActions = navigationActions
                 )

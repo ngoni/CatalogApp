@@ -27,7 +27,7 @@ buildscript {
                 lifecycleExtensions    : '2.3.1',
                 material               : '1.5.0',
                 navigation             : '2.4.1',
-                navigationSafeArgs     : '2.5.0-alpha01', // todo: downgrade when v2.4.1 is available
+                navigationSafeArgs     : '2.4.1',
                 coreKtx                : '1.7.0',
                 recyclerview           : '1.2.1'
         ]

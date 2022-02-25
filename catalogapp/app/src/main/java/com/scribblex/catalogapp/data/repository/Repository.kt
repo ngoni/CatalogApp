@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.transform
 import javax.inject.Inject
 
-class CatalogRepository @Inject constructor(
+class Repository @Inject constructor(
     private val remoteDataSource: CatalogRemoteDataSource
 ) {
 
@@ -42,5 +42,27 @@ class CatalogRepository @Inject constructor(
                 }
                 emit(Resource.success(groupedMap))
             }
+    }
+
+    fun getProduct(categoryId: Int, productId: Int): Flow<BaseModel> {
+        return remoteDataSource.catalogList.transform {
+            for (item in it.data!!) {
+                if (item.id == categoryId) {
+                    for (product in item.products) {
+                        if (product.id == productId) {
+                            val productModel = ProductModel(
+                                categoryId = item.id,
+                                productId = product.id,
+                                productName = product.name,
+                                url = product.url,
+                                productDescription = product.description,
+                                salePrice = product.salePrice
+                            )
+                            emit(productModel)
+                        }
+                    }
+                }
+            }
+        }
     }
 }
