@@ -37,7 +37,10 @@ fun ProductDetailScreen(
     val viewModel = hiltViewModel<ProductDetailViewModel>()
     val viewState = viewModel.getViewState().observeAsState().value
     viewState?.let { renderUI(it) }
-    viewModel.getProduct(categoryId, productId)
+
+    if (viewState == null) {
+        viewModel.getProduct(categoryId, productId)
+    }
 }
 
 @Composable

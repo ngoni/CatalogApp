@@ -47,8 +47,9 @@ fun CatalogListScreen(
     val viewState = viewModel.getViewState().observeAsState().value
     viewState?.let { renderUI(uiModel = it) }
 
-    // TODO: use rememberState
-    viewModel.queryCatalog()
+    if (viewState == null) {
+        viewModel.queryCatalog()
+    }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
